@@ -5,3 +5,10 @@ streamlit-authenticator
 pandas 
 
 numpy 
+
+beautifulsoup4       # If you're parsing HTML
+requests             # If you're fetching data from websites or APIs
+matplotlib           # If you're plotting charts
+scikit-learn         # If you're doing any scoring or ML
+
+selenium
