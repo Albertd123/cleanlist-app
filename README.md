@@ -4,6 +4,29 @@
     # 2) streamlit run CleanList.py   
 #To end run in terminal, use "CTRL + C"
 
+🚀 Deploy Your App on Streamlit Cloud
+Streamlit Cloud is the easiest way to host and share your app for free.
+
+✅ Step-by-Step:
+Go to streamlit.io/cloud
+
+Sign in with your GitHub account
+
+Click “New app”
+
+Select your repo (e.g., cleanlist-app)
+
+Choose the branch (usually main) and the Python file (e.g., app.py)
+
+Click “Deploy”
+
+Streamlit will build and launch your app — and give you a public URL like:
+
+Code
+https://cleanlist-app.streamlit.app
+
+
+
 
 
 Public URL: 
