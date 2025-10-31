@@ -1,3 +1,18 @@
+✅ Step-by-Step: Copy Files from master to main
+1) git checkout main
+2) git fetch origin master
+3) git checkout origin/master -- filename.py filename.txt folder_name/filename.toml
+4) git add .
+5) git commit -m "Copied specific files from master into main"
+6) git push origin main
+
+✅list all branches (local and remote):
+git branch -a
+
+✅see and work with the main branch locally
+git fetch origin
+git checkout main
+
 #StreaLit App directory: cd "OneDrive - Emory\Entreprenuership\CleanList\Python" 
 #Run these in command prompt to test Strealit App:
     # 1) ipynb-py-convert CleanList.ipynb CleanList.py
