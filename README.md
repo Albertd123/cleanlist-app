@@ -1,4 +1,4 @@
-#StreaLit App directory: cd "OneDrive - Emory\Entreprenuership\CleanList\Python" 
+#StreaLit App directory: cd "\Python_folder_location" 
 #Run these in command prompt to test Strealit App:
     # 1) ipynb-py-convert CleanList.ipynb CleanList.py
     # 2) streamlit run CleanList.py   
