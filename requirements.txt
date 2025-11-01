@@ -1,7 +1,7 @@
-# Core app framework
+
 streamlit
 
-# Data handling
+
 pandas
 numpy
 
@@ -11,15 +11,14 @@ scikit-learn
 
 selenium
 
-# NLP and transformers
+
 torch
 transformers
 sentence-transformers
 
-# Plotting and visualization
+
 matplotlib
 seaborn
 plotly
 
-# Optional: if using Chrome with Selenium
 chromedriver-autoinstaller
