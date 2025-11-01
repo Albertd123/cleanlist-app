@@ -13,6 +13,20 @@ git branch -a
 git fetch origin
 git checkout main
 
+
+✅Default Start:
+git checkout master
+git branch -a
+Desired output
+main
+* master
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/master
+
+
+
+
 #StreaLit App directory: cd "OneDrive - Emory\Entreprenuership\CleanList\Python" 
 #Run these in command prompt to test Strealit App:
     # 1) ipynb-py-convert CleanList.ipynb CleanList.py
