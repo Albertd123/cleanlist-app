@@ -397,8 +397,11 @@ with open("banner2.jpg", "rb") as f:
     bg_data = base64.b64encode(f.read()).decode()
 
 # Load and encode logo pic
-with open("CleanList logo.png", "rb") as f:
-    logo_data = base64.b64encode(f.read()).decode()
+if os.path.exists("CleanList logo.png"):
+    with open("CleanList logo.png", "rb") as f:
+        st.image(f, use_column_width=True)
+else:
+    st.warning("Logo image not found. Skipping display.")
 
 # Inject custom CSS
 st.markdown(f"""
