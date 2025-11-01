@@ -1,3 +1,16 @@
+C:\Users\edjik\OneDrive - Emory\Entreprenuership\CleanList\Python> git branch -a
+* main
+  master
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/master
+Meaning:
+- You're currently on the main branch locally (* main)
+- Both main and master exist on GitHub (remotes/origin/main, remotes/origin/master)
+- GitHub recognizes main as the default (remotes/origin/HEAD -> origin/main)
+
+
+
 #StreaLit App directory: cd "OneDrive - Emory\Entreprenuership\CleanList\Python" 
 #Run these in command prompt to test Strealit App:
     # 1) ipynb-py-convert CleanList.ipynb CleanList.py
