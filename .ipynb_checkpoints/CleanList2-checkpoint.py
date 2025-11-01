@@ -402,7 +402,7 @@ try:
     with open("CleanList Logo.png", "rb") as f:
         image_bytes = f.read()
         logo_data = base64.b64encode(image_bytes).decode("utf-8")
-        st.image(image_bytes, use_container_width=True)
+        # st.image(image_bytes, use_container_width=True)
 except FileNotFoundError:
     st.warning("Logo image not found.")
 
