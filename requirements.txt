@@ -1,8 +1,14 @@
-streamlit 
+# Core app framework
+streamlit
 
-streamlit-authenticator 
+# Data handling
+pandas
+numpy
 
-pandas 
+# Web scraping
+selenium
+beautifulsoup4
+requests
 
 numpy 
 
@@ -12,3 +18,16 @@ matplotlib           # If you're plotting charts
 scikit-learn         # If you're doing any scoring or ML
 
 selenium
+=======
+# NLP and transformers
+torch
+transformers
+sentence-transformers
+
+# Plotting and visualization
+matplotlib
+seaborn
+plotly
+
+# Optional: if using Chrome with Selenium
+chromedriver-autoinstaller

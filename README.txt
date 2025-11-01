@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ✅ Step-by-Step: Copy Files from master to main
 1) git checkout main
 2) git fetch origin master
@@ -24,6 +25,21 @@ main
   remotes/origin/main
   remotes/origin/master
 
+git pull origin master
+git push origin master
+
+=======
+C:\Users\edjik\OneDrive - Emory\Entreprenuership\CleanList\Python> git branch -a
+* main
+  master
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/master
+Meaning:
+- You're currently on the main branch locally (* main)
+- Both main and master exist on GitHub (remotes/origin/main, remotes/origin/master)
+- GitHub recognizes main as the default (remotes/origin/HEAD -> origin/main)
+>>>>>>> 9608222b42c46e5e257f4072edc5e0a0048712f7
 
 
 
