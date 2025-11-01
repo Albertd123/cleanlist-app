@@ -397,14 +397,16 @@ with open("banner2.jpg", "rb") as f:
     bg_data = base64.b64encode(f.read()).decode()
 
 # Load and encode logo pic
+# Load and encode logo image
 try:
     with open("CleanList logo.png", "rb") as f:
-        logo_data = f.read()
-        st.image(logo_data, use_column_width=True)
+        logo_data = base64.b64encode(f.read()).decode("utf-8")
+        st.image(f, use_column_width=True)
 except FileNotFoundError:
+    logo_data = None
     st.warning("Logo image not found. Skipping display.")
 
-# Inject custom CSS
+# Inject custom CSS and HTML
 st.markdown(f"""
     <style>
         .top-banner {{
@@ -440,10 +442,57 @@ st.markdown(f"""
 
     <div class="top-banner">
         <a href="http://192.168.1.77:8501" target="_blank">
-            <img src="data:image/png;base64,{logo_data}" class="responsive-logo">
+            {"<img src='data:image/png;base64," + logo_data + "' class='responsive-logo'>" if logo_data else ""}
         </a>
     </div>
 """, unsafe_allow_html=True)
+# try:
+#     with open("CleanList logo.png", "rb") as f:
+#         logo_data = f.read()
+#         st.image(logo_data, use_column_width=True)
+# except FileNotFoundError:
+#     st.warning("Logo image not found. Skipping display.")
+
+# # Inject custom CSS
+# st.markdown(f"""
+#     <style>
+#         .top-banner {{
+#             background-image: url("data:image/png;base64,{bg_data}");
+#             background-size: cover;
+#             background-position: center;
+#             padding: 3rem 1rem;
+#             text-align: center;
+#             width: 100%;
+#             position: sticky;
+#             top: 0;
+#             z-index: 999;
+#         }}
+#         .sticky-header h1 {{
+#             font-family: 'Inter', sans-serif;
+#             font-size: 6vw;
+#             margin: 0;
+#             font-weight: bold;
+#             color: white;
+#             text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+#         }}
+#         .responsive-logo {{
+#             max-width: 250px;
+#             height: auto;
+#             margin-bottom: 1rem;
+#         }}
+#         @media (max-width: 768px) {{
+#             .sticky-header h1 {{
+#                 font-size: 8vw;
+#             }}
+#         }}
+#     </style>
+
+#     <div class="top-banner">
+#         <a href="http://192.168.1.77:8501" target="_blank">
+#             <img src="data:image/png;base64,{logo_data}" class="responsive-logo">
+#         </a>
+#     </div>
+# """, unsafe_allow_html=True)
 
 # ---------- Button Row ----------
 st.markdown("""
