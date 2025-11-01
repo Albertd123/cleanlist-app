@@ -408,6 +408,9 @@ if os.path.exists(logo_path):
 else:
     st.warning("Logo image not found. Skipping display.")
 
+# Build the <img> tag conditionally
+logo_html = f"<img src='data:image/png;base64,{logo_data}' class='responsive-logo'>" if logo_data else ""
+
 # Inject custom CSS and HTML
 st.markdown(f"""
     <style>
@@ -444,7 +447,7 @@ st.markdown(f"""
 
     <div class="top-banner">
         <a href="http://192.168.1.77:8501" target="_blank">
-            {"<img src='data:image/png;base64," + logo_data + "' class='responsive-logo'>" if logo_data else ""}
+            {logo_html}
         </a>
     </div>
 """, unsafe_allow_html=True)
