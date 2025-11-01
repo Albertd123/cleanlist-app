@@ -399,15 +399,13 @@ with open("banner2.jpg", "rb") as f:
 # Define logo_data upfront to avoid NameError
 logo_data = ""
 
-# Try to load and encode the logo image
-logo_path = "CleanList logo.png"
-if os.path.exists(logo_path):
-    with open(logo_path, "rb") as f:
+try:
+    with open("CleanList logo.png", "rb") as f:
         image_bytes = f.read()
         logo_data = base64.b64encode(image_bytes).decode("utf-8")
-        st.image(image_bytes, use_column_width=True)
-else:
-    st.warning("Logo image not found. Skipping display.")
+        st.image(image_bytes, use_container_width=True)
+except FileNotFoundError:
+    st.warning("Logo image not found.")
 
 # Build the <img> tag conditionally
 logo_html = f"<img src='data:image/png;base64,{logo_data}' class='responsive-logo'>" if logo_data else ""
