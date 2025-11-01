@@ -31,12 +31,11 @@ GMO_INGREDIENTS = [
     "canola", "canola oil", "cottonseed oil", "sugar beets", "refined sugar",
     "papaya (ringspot virus-resistant)", "summer squash (zucchini, yellow squash)",
     "potato (innate varieties)", "apple (Arctic varieties)","pink pineapple", 
-    "alfalfa", "eggplant (BARI Bt Begun varieties)",
-    "palm oil", "corn syrup", "high fructose corn syrup", "soybean oil", 
+    "alfalfa", "eggplant (BARI Bt Begun varieties)", "corn syrup", "high fructose corn syrup", "soybean oil", 
     "vegetable oil", "rapeseed oil", "soy protein isolate", "wheat flour", 
     "refined flour", "white flour", "enriched flour", "sugar", "glucose", 
     "fructose", "dextrose", "maltodextrin", "papaya", "summer squash", "potato", 
-    "apple", "pink pineapple", "cottonseed oil"
+    "apple", "pink pineapple", "cottonseed oil","cane sugar"
 ]
 
 ARTIFICIAL_INGREDIENTS = [
@@ -52,8 +51,7 @@ ARTIFICIAL_INGREDIENTS = [
     "dimethylpolysiloxane", "polysorbate 80", "polysorbate 60",
     "carboxymethylcellulose", "cellulose gum",
     "disodium inosinate", "disodium guanylate",
-    "aluminum salts", "synthetic vanillin",
-    "palm oil", 
+    "aluminum salts", "synthetic vanillin", 
     # Sugars/Syrups
     "corn syrup", "high fructose corn syrup", "invert sugar", "glucose", "dextrose", "fructose", "maltodextrin",
     # Trans fats
@@ -78,25 +76,60 @@ ARTIFICIAL_INGREDIENTS = [
     "artificial flavor", "artificial flavours", "artificial color", "artificial colour", "natural flavors", "natural flavour"
 ]
 
+HEALTHY_INGREDIENTS = [
+    # Whole Food-Based Ingredients
+    "oats", "quinoa", "brown rice", "farro", "millet", "barley",
+    "lentils", "chickpeas", "black beans", "edamame",
+    "almonds", "walnuts", "chia seeds", "flaxseeds", "sunflower seeds", "pumpkin seeds",
+    "dates", "raisins", "apricots", "figs", "goji berries",
+    "kale", "spinach", "sweet potato", "beetroot", "carrots", "peas",
+    "apple", "banana", "blueberry", "mango", "pineapple",
+
+    # Natural Flavor Enhancers & Seasonings
+    "turmeric", "cinnamon", "ginger", "garlic", "basil", "oregano", "cumin",
+    "sea salt", "apple cider vinegar", "balsamic vinegar", "lemon juice", "lime juice",
+
+    # Clean Dairy & Alternatives
+    "greek yogurt", "almond milk", "oat milk", "cashew milk",
+    "feta cheese", "goat cheese", "part-skim mozzarella",
+
+    # Functional Additives
+    "honey", "maple syrup", "monk fruit", "stevia",
+    "psyllium husk", "inulin", "chicory root fiber",
+    "lactobacillus", "bifidobacterium",
+    "pea protein", "whey isolate", "hemp protein",
+    "calcium carbonate","soy protein isolate"
+]
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
 #                                                          ---- Heuristic CleanScore engine ----
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
 
 # --- Predefined Grocery Database  ---
 grocery_item_db = {
-    "granola_Quaker Oats": ["organic oats", "cane sugar", "honey", "almonds"],
+    "Oats_brand1": ["organic oats", "cane sugar", "honey", "almonds"],
+    "Oats_brand2": ["organic oats", "cane sugar", "honey"],
+    "Oats_brand3": ["organic oats", "cane sugar"],
+    "Oats_brand4": ["honey", "almonds"],
+    "nola_Quaker1": ["honey"],
+    "nola_Quaker2": ["organic oats", "cane sugar", "honey"],
+    "Quaker": ["organic oats"],
     "Justin's": ["roasted peanuts", "salt", "palm oil"],
-    "Maruchan Instant Lunch": ["wheat flour", "salt", "monosodium glutamate", "vegetable oil"],
+    "noodles_brand1": ["wheat flour", "salt", "monosodium glutamate", "vegetable oil"],
+    "noodles_brand2": ["monosodium glutamate", "vegetable oil"],
+    "noodles_brand3": ["wheat flour", "salt"],
     "Almond Breeze": ["filtered water", "almonds", "calcium carbonate", "vitamin D2"],
-    "Quest": ["soy protein isolate", "chocolate chips", "sugar", "natural flavors"]
+    "protein_brand1": ["soy protein isolate", "chocolate chips", "sugar", "natural flavors"],
+    "protein_brand2": ["soy protein isolate", "natural flavors"]
 }
 
 grocery_brands_db = {
-     "granola": ['granola_Quaker Oats'],
+     "granola": ['Oats_brand1','Oats_brand2','Oats_brand3','Oats_brand4'],
+     "nola": ['nola_Quaker1','nola_Quaker2'],
+     "ola": ['Quaker'],
      "peanut butter": ["Justin's"],
-     "instant noodles": ["Maruchan Instant Lunch"],
+     "instant noodles": ["noodles_brand1","noodles_brand2","noodles_brand3"],
      "almond milk": ["Almond Breeze"],
-     "protein bar": ["Quest"]
+     "protein bar": ["protein_brand1","protein_brand2"]
 }
 
 
@@ -121,7 +154,7 @@ def convert_logo_to_base64(logo_file_path):
     
 #///////////////////////   ******** Function for ingredient color map ********    
 def ingredient_color_map(ingredient):
-    if ingredient in GMO_INGREDIENTS or ARTIFICIAL_INGREDIENTS:
+    if ingredient in GMO_INGREDIENTS or ingredient in ARTIFICIAL_INGREDIENTS:
         return f"<span style='color:red; font-weight:bold;'>{ingredient}</span>"
     else:
         return ingredient  # default color
@@ -162,22 +195,26 @@ def flash_message(message, msg_type, duration=2):
     msg_box.empty()
     css_box.empty()
 
-#/////////////////////// ******** Function for creating CleanList ******** 
+#/////////////////////// ******** Function for creating CleanList ********
 def create_CleanList(input_value):
-        item_text = normalize_text(input_value)
-        for key, values in grocery_brands_db.items(): 
-            if item_text in key: 
-                top_brand_name = values[0]                          # Concatenate key with its first value 
-                top_brand_name_clean = top_brand_name.strip()       # Clean up any extra spaces to match list1 keys
-                for k in grocery_item_db:                           # Search for matching key in list1 (strip keys to avoid spacing issues) 
-                    if k.strip() == top_brand_name_clean: 
-                        return grocery_item_db[k] 
-        else:
-            return input_value
+    item_text = normalize_text(input_value)
+
+    for key, values in grocery_brands_db.items():
+        key_normalized = normalize_text(key)
+
+        # Use full match instead of partial match
+        if item_text == key_normalized:
+            top_brand_name = values[0].strip()
+
+            for k in grocery_item_db:
+                if normalize_text(k) == normalize_text(top_brand_name):
+                    return grocery_item_db.get(k, "Item Not Available")
+
+    return input_value
 
 # ///////////////////////   ******** Function to compute a bounded CleanScore ******** 
 def score_item(item: str, ingredients: Optional[str]) -> Tuple[int, Dict[str, List[str]]]:
-    base = 50
+    base = 100
     item_text = normalize_text(item) 
     ing_text = " ".join(normalize_text(i) for i in ingredients or [item]) #normalize_text(ingredients or item)
     matched = {"GMO": [], "AI": [], "both": []}
@@ -199,9 +236,9 @@ def score_item(item: str, ingredients: Optional[str]) -> Tuple[int, Dict[str, Li
 
     # Scoring logic (bounded) 
     score = base 
-    score += 14 * len(matched["GMO"])                  # per unique positive 
-    score -= 7 * len(matched["AI"])              # per unique moderate negative 
-    score -= 14 * len(matched["both"])               # per unique strong negative 
+    score -= 7 * len(matched["GMO"])                  # per unique positive 
+    score -= 14 * len(matched["AI"])              # per unique moderate negative 
+    score -= 30 * len(matched["both"])               # per unique strong negative 
     score = max(0, min(100, int(round(score)))) 
     return score, matched
 
@@ -257,6 +294,16 @@ def color_code_ingredients(ingredients, CleanScore):
 #///////////////////////   ******** Function for Defensive Flattening ********
 def flatten(lst):
     return [item for sublist in lst for item in (sublist if isinstance(sublist, list) else [sublist])]
+
+# ---------- Function for Checkbox: "Select All" ----------
+def _on_select_all_changed():
+    val = st.session_state["select_all"]
+    for it in st.session_state.item_list:
+        st.session_state[f"sel_{it['id']}"] = val
+
+# ---------- Callback for Enter key ----------
+def trigger_search_callback():
+    st.session_state.trigger_search = True
     
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
 #                          ✈️🏨💰💕🌴🏝️💎🌺⇒👥💡📊👉💳🧱 🛒 📝 🧪 🧺🎷🛒 📝  ---- Streamlit UI ---- 📍✅ 📋 🧼 🍑 🔐📸🔍🧾🧩🧑‍💻🎯➡️🎥🌊🌅✨                          
@@ -271,30 +318,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# ---------- Sidebar ----------
-st.sidebar.markdown("""
-    <div style="
-        font-weight: bold;
-        font-size: 50px;
-        color: peach;
-        text-shadow: -1px -1px 0 green, 1px -1px 0 black,
-                     -1px 1px 0 green, 1px 1px 0 black;
-        text-align: center;
-        display: block;
-        margin-bottom: 0.5rem;
-    ">
-        Menu
-    </div>
-""", unsafe_allow_html=True)
-with st.sidebar.expander("Groceries"):
-    st.markdown("- Apples\n- Bananas\n- Bread")
-
-with st.sidebar.expander("Favorites"):
-    st.markdown("- Granola\n- Almond Milk")
-
-with st.sidebar.expander("Suggestions"):
-    st.markdown("- Try oat milk\n- Add leafy greens")
 
 # ---------- Custom CSS ----------
 st.markdown("""
@@ -418,122 +441,6 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-
-# ---------- Main Content ----------
-#  Initialize empty list
-if "item_list" not in st.session_state:
-    st.session_state.item_list = []
-if "select_all" not in st.session_state:
-    st.session_state.select_all = False
-if "editing" not in st.session_state:
-    st.session_state.editing = False
-if "just_interacted" not in st.session_state:
-    st.session_state.just_interacted = False
-if "app_initialized" not in st.session_state:
-    st.session_state.app_initialized = False
-if "prefill_input" in st.session_state:
-    st.session_state.add_item_input = st.session_state.prefill_input
-    del st.session_state.prefill_input
-if "show_create_button" not in st.session_state:
-    st.session_state.show_create_button = False
-    
-#///////////////////////  ******** Get User Input ********
-# ---------- Input field ----------
-new_item = st.text_input("Add an item to your list", placeholder="e.g. Granola", key="add_item_input")
-
-# ---------- Filtered suggestions (only when typing) ----------
-typed = new_item.strip().lower()
-matches = [brand for brand in grocery_brands_db if typed and typed in brand.lower()]
-
-if matches:
-    st.markdown("#### Choose from the following")
-    for match in matches:
-        match_lower = match.lower()
-        match_index = match_lower.find(typed)
-        highlighted = (
-            f"{match[:match_index]}"
-            f"<span style='background-color:#ffd700; font-weight:bold;'>"
-            f"{match[match_index:match_index+len(typed)]}</span>"
-            f"{match[match_index+len(typed):]}"
-        )
-        if st.button(match, key=f"suggestion_{match}"):
-            st.session_state.prefill_input = match
-            st.rerun()
-        st.markdown(f"<div style='margin-top:-10px;'>{highlighted}</div>", unsafe_allow_html=True)
-
-# ---------- Add to list ----------
-if st.button("Add to list"):
-    input_value = st.session_state.get("add_item_input", "").strip()
-    normalized_input = input_value.lower()
-
-    if not input_value:
-        st.warning("Please enter an item before adding.")
-    elif input_value not in grocery_brands_db:
-        st.warning("Item not in database.")
-    else:
-        existing_labels = [it["label"].strip().lower() for it in st.session_state.item_list]
-        if normalized_input in existing_labels:
-            st.warning(f"'{input_value}' is already in your CleanList.")
-        else:
-            st.session_state.item_list.append({
-                "id": f"it_{uuid4().hex}",
-                "label": input_value
-            })
-            st.session_state.show_create_button = True
-            st.success(f"Added: {input_value}")
-
-# ---------- Conditionally show "Create My CleanList" button ----------
-if st.session_state.show_create_button:
-    st.button("Create My CleanList")
-
-
-# ---------- Checkbox: "Select All" ----------
-def _on_select_all_changed():
-    val = st.session_state["select_all"]
-    for it in st.session_state.item_list:
-        st.session_state[f"sel_{it['id']}"] = val
-
-# ---------- Editing UI (only when editing) ----------
-if st.session_state.editing and st.session_state.item_list:
-    st.checkbox("Select All", key="select_all", on_change=_on_select_all_changed)
-    st.markdown("### 🧺 Select items to remove:")
-    for i, it in enumerate(st.session_state.item_list, 1):
-        st.checkbox(f"{i}. {it['label']}", key=f"sel_{it['id']}")
-        
-    # ---------- Button: "Remove Selected Items" ----------
-    if st.button("🗑️ Remove Selected Items"):
-        st.session_state.just_interacted = True
-        selected_ids = [it["id"] for it in st.session_state.item_list if st.session_state.get(f"sel_{it['id']}", False)]
-        if selected_ids:
-            # Rebuild list (don’t mutate while iterating)
-            st.session_state.item_list = [it for it in st.session_state.item_list if it["id"] not in selected_ids]
-            # Clean up checkbox state for removed items
-            for sid in selected_ids:
-                st.session_state.pop(f"sel_{sid}", None)
-            flash_message(f"Removed: {len(selected_ids)} item(s)", msg_type="success", duration=1)
-            st.session_state.app_initialized = True
-            st.rerun()  # 🔁 Force immediate UI update
-        else:
-            flash_message("No items selected for removal.", msg_type="warning", duration=1)
-            
-    # ---------- Button: "Done Editing" ----------
-    if st.button("✅ Done Editing"):
-        st.session_state.editing = False
-        st.session_state.just_interacted = True
-        st.session_state.app_initialized = True
-        st.rerun()  # 🔁 Force immediate UI update
-            
-# ---------- Current Items  List (always visible) ----------
-if st.session_state.item_list:
-    st.markdown("🧪 Current Items:")
-    for i, it in enumerate(st.session_state.item_list, 1):
-        st.markdown(f"{i}. {it['label']}")
-else:
-    if not st.session_state.item_list and not st.session_state.editing and not st.session_state.just_interacted and st.session_state.app_initialized:
-        flash_message("Your CleanList is currently empty.", msg_type="info", duration=1)
-
-st.session_state.just_interacted = False         # Reset interaction flag for next rerun
-
 # ---------- Button Row ----------
 st.markdown("""
 <style>
@@ -552,60 +459,135 @@ div[data-testid="stHorizontalBlock"] {
 </style>
 """, unsafe_allow_html=True)
 
-col1, col2 = st.columns([1, 1])
-   
-# ---------- Button: "Create My CleanList" (explicit action) ----------
-if not st.session_state.editing and st.session_state.get("show_create_button", False):
-    with col1:
-        st.markdown('<div class="button-container">', unsafe_allow_html=True)
-        create_clicked = st.button("🚀 Create My CleanList!")
-        if create_clicked:
-            st.session_state.just_interacted = True
-            if not st.session_state.item_list:
-                flash_message("Your list is empty. Add items before creating your CleanList.", msg_type="warning", duration=1.2)
-            else:
-                ingredients_array = []
-                labels = []
-                combined = []
-                for it in st.session_state.item_list:
-                    item_text = it["label"]
-                    label= normalize_text(item_text)
-                    labels.append(label)
-                    try:
-                        mapped = create_CleanList(label)  # expects a string in, returns mapped value or None
-                    except NameError:
-                        no_item_present = "Item Not Available"
-                        ingredients_array.append(no_item_present)
-                    else:
-                        if mapped == label:
-                            no_item_present = "Item Not Available"
-                            ingredients_array.append(no_item_present)
-                        else:
-                            ingredients_array.append(mapped)
-                
-                labels_flat = flatten(labels) if isinstance(labels, list) else [labels]
-                st.success("Your CleanList is ready!")
-                st.markdown("### 🍑 CleanList:")
-    
-                for label, ingredients in zip(labels_flat, ingredients_array):
-                    if ingredients == "Item Not Available":
-                        ingredients = "Igredients Not Available"
-                        CleanScore = ["CleanScore Not Available"]
-                    else:
-                        CleanScore = score_item(label,ingredients)
-                    item_formatted = color_code_ingredients(ingredients,CleanScore[0])
-                    # if st.session_state.get("item_list"):
-                    #     for i, item in enumerate(st.session_state.item_list, 1):
-                    st.markdown(f"{label} **→** **CleanScore** = {item_formatted[0]}", unsafe_allow_html=True) 
-                    if item_formatted[1] == "Igredients Not Available":
-                        joined_items = ingredients
-                    else:
-                        joined_items = ", ".join(item_formatted[1])     # Join items into a single line, separated by commas
-                    st.markdown(f"""<ul><li><span style='font-weight:bold;'>Ingredients →</span> {joined_items}</li></ul>""", unsafe_allow_html=True)
-                    # st.markdown(f"&nbsp;&nbsp;&nbsp;- Ingredients **→** {joined_items}", unsafe_allow_html=True)  
-        st.markdown('</div>', unsafe_allow_html=True)            
+# ---------- Main Content ----------
+#  Session Flags: Initialize states 
+if "item_list" not in st.session_state:
+    st.session_state.item_list = []
+if "select_all" not in st.session_state:
+    st.session_state.select_all = False
+if "editing" not in st.session_state:
+    st.session_state.editing = False
+if "just_interacted" not in st.session_state:
+    st.session_state.just_interacted = False
+if "app_initialized" not in st.session_state:
+    st.session_state.app_initialized = False
+if "prefill_input" in st.session_state:
+    st.session_state.add_item_input = st.session_state.prefill_input
+    del st.session_state.prefill_input
+if "show_create_button" not in st.session_state:
+    st.session_state.show_create_button = False
+if "trigger_search" not in st.session_state:
+    st.session_state.trigger_search = False
+if "suggestion_locked" not in st.session_state:
+    st.session_state.suggestion_locked = False
+if "show_create_cleanlist_button" not in st.session_state:
+    st.session_state.show_create_cleanlist_button = False
+if "manual_search" not in st.session_state:
+    st.session_state.manual_search = False
 
-    # ---------- Button: Edit List (toggle) ----------
+import streamlit as st
+from uuid import uuid4
+
+# ---------- Prefill logic ----------
+if "prefill_input" in st.session_state:
+    st.session_state.add_item_input = st.session_state.prefill_input
+    del st.session_state.prefill_input
+    
+if st.session_state.get("clear_input", False):
+    st.session_state.add_item_input = ""
+    st.session_state.clear_input = False
+    
+if not st.session_state.editing:    
+    # ---------- Input + Search Form ----------
+    with st.form("search_form", clear_on_submit=False):
+        st.text_input(
+            "Add an item to your list",
+            key="add_item_input",
+            placeholder="e.g. Granola"
+        )
+        submitted = st.form_submit_button("Search Item")
+    
+    if submitted:
+        typed = st.session_state.get("add_item_input", "").strip().lower()
+        if not typed:
+            flash_message("No item entered.", msg_type="warning", duration=2)
+        else:
+            st.session_state.trigger_search = True
+            st.session_state.manual_search = True
+            st.session_state.suggestion_locked = False
+            st.session_state.last_typed = typed
+            st.rerun()
+    
+    # ---------- Suggestion Matching ----------
+    typed = st.session_state.get("add_item_input", "").strip().lower()
+    
+    if not st.session_state.get("suggestion_locked", False):
+        if typed and typed != st.session_state.get("last_typed", ""):
+            st.session_state.last_typed = typed
+    
+    typed_for_match = st.session_state.get("last_typed", "")
+    matches = [brand for brand in grocery_brands_db if typed_for_match and typed_for_match in brand.lower()]
+
+# ---------- Suggestion Rendering ----------
+if not st.session_state.editing and st.session_state.trigger_search and matches:
+    st.markdown("#### Choose from the following")
+    for match in matches:
+        match_lower = match.lower()
+        match_index = match_lower.find(typed_for_match)
+        highlighted = (
+            f"{match[:match_index]}"
+            f"<span style='background-color:#ffd700; font-weight:bold;'>"
+            f"{match[match_index:match_index+len(typed_for_match)]}</span>"
+            f"{match[match_index+len(typed_for_match):]}"
+        )
+
+        st.markdown(f"<div style='margin-top:-10px;'>{highlighted}</div>", unsafe_allow_html=True)
+
+        if st.button(match, key=f"suggestion_{match}"):
+            st.session_state.prefill_input = match
+            st.session_state.show_create_button = True
+            st.session_state.suggestion_locked = True
+            st.session_state.manual_search = False
+            st.rerun()
+
+    if st.button("Clear suggestions"):
+        st.session_state.trigger_search = False
+        st.session_state.last_typed = ""
+        st.session_state.show_create_button = False
+        st.session_state.suggestion_locked = False
+        st.session_state.manual_search = True
+        st.rerun()
+
+# ---------- Add to List ----------
+if st.session_state.get("show_create_button", False) and not st.session_state.editing:
+    if st.button("Add to list"):
+        input_value = st.session_state.get("add_item_input", "").strip()
+        normalized_input = input_value.lower()
+
+        if not input_value:
+            flash_message("Please enter an item before adding.", msg_type="warning", duration=2)
+        elif input_value not in grocery_brands_db:
+            flash_message(f"'{input_value}' not in database.", msg_type="warning", duration=2)
+        else:
+            existing_labels = [it["label"].strip().lower() for it in st.session_state.item_list]
+            if normalized_input in existing_labels:
+                flash_message(f"'{normalized_input}' is already in your CleanList.", msg_type="warning", duration=2)
+            else:
+                st.session_state.item_list.append({
+                    "id": f"it_{uuid4().hex}",
+                    "label": input_value
+                })
+                st.session_state.clear_input = True
+                st.session_state.last_typed = ""
+                st.session_state.trigger_search = False
+                st.session_state.suggestion_locked = False
+                st.session_state.show_create_button = False
+                st.session_state.show_create_cleanlist_button = True
+                st.success(f"Added: {input_value}")
+                st.rerun()  
+
+# ---------- Button: Edit List (toggle) ----------
+col1, col2 = st.columns([1, 1])
 if not st.session_state.editing and st.session_state.item_list:
     with col2:
         if st.button("✏️ Edit List"):
@@ -615,7 +597,197 @@ if not st.session_state.editing and st.session_state.item_list:
             st.rerun()  # 🔁 Force immediate UI update
         st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
-    
+
+# ---------- Editing UI (only when editing) ----------
+if st.session_state.editing:
+    if st.session_state.item_list:
+        st.checkbox("Select All", key="select_all", on_change=_on_select_all_changed)
+        st.markdown("### 🧺 Select items to remove:")
+        for i, it in enumerate(st.session_state.item_list, 1):
+            st.checkbox(f"{i}. {it['label']}", key=f"sel_{it['id']}")
+    else:
+        st.markdown("Your CleanList is empty. Nothing to edit.")
+
+    # ---------- Button: "Remove Selected Items" ----------
+    if st.button("🗑️ Remove Selected Items"):
+        st.session_state.just_interacted = True
+        selected_ids = [it["id"] for it in st.session_state.item_list if st.session_state.get(f"sel_{it['id']}", False)]
+        if selected_ids:
+            st.session_state.item_list = [it for it in st.session_state.item_list if it["id"] not in selected_ids]
+            for sid in selected_ids:
+                st.session_state.pop(f"sel_{sid}", None)
+            flash_message(f"Removed: {len(selected_ids)} item(s)", msg_type="success", duration=1)
+            st.session_state.app_initialized = True
+            if not st.session_state.item_list:
+                st.session_state.editing = False
+            st.rerun()
+        else:
+            flash_message("No items selected for removal.", msg_type="warning", duration=1)
+
+    # ---------- Button: "Done Editing" ----------
+    if st.button("✅ Done Editing"):
+        st.session_state.editing = False
+        st.session_state.just_interacted = True
+        st.session_state.app_initialized = True
+        st.rerun()
+            
+# ---------- Current Items  List (always visible) ----------
+if st.session_state.item_list and not st.session_state.editing:
+    st.markdown("🧪 Current Items:")
+    for i, it in enumerate(st.session_state.item_list, 1):
+        st.markdown(f"{i}. {it['label']}")
+        
+    # ---------- Button: "Create My CleanList" (explicit action) ----------
+if not st.session_state.editing and st.session_state.get("show_create_cleanlist_button", False):
+    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    create_clicked = st.button("🚀 Create My CleanList!")
+    if create_clicked:
+        st.session_state.just_interacted = True
+
+        if not st.session_state.item_list:
+            flash_message("Your list is empty. Add items before creating your CleanList.", msg_type="warning", duration=2)
+        else:
+            # ✅ Define number generator
+            def generate_sleek_numbers(n):
+                circled_base = ord("①")
+                circled_limit = ord("⑳")
+                sleek_numbers = []
+                for i in range(n):
+                    if circled_base + i <= circled_limit:
+                        sleek_numbers.append(chr(circled_base + i))
+                    else:
+                        sleek_numbers.append(f"🔢{i+1}")
+                return sleek_numbers
+
+            st.success("Your CleanList is ready below!")
+
+            # 🍑 Glossy CleanList Header (centered)
+            st.markdown(
+                """
+                <style>
+                @keyframes shine {
+                    0% {background-position: -200px;}
+                    100% {background-position: 200px;}
+                }
+                .cleanlist-header {
+                    font-size: clamp(2.5em, 8vw, 6em);
+                    font-weight: 900;
+                    background: linear-gradient(90deg, #ff8a65, #ffd54f);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    animation: shine 3s infinite linear;
+                    background-size: 400px;
+                    margin-bottom: 30px;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                }
+                </style>
+            
+                <div style="text-align: center;">
+                    <h1 class="cleanlist-header">🍑 CleanList</h1>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            # 🎨 Color palette for item-level styling
+            item_colors = ["#e0f7fa", "#fce4ec", "#f3e5f5", "#e8f5e9", "#fff3e0", "#ede7f6", "#f9fbe7", "#e1f5fe"]
+
+            for item_index, item_dict in enumerate(st.session_state.item_list):
+                item_text = item_dict["label"]
+                label = normalize_text(item_text)
+                brand_list = grocery_brands_db.get(label) or grocery_brands_db.get(item_text)
+                if not brand_list:
+                    st.markdown(f"<div style='color:gray;font-style:italic;'>{item_text} → No brands found.</div>", unsafe_allow_html=True)
+                    continue
+
+                brand_scores = []
+                for brand in brand_list:
+                    ingredients = grocery_item_db.get(brand, ["Ingredients Not Available"])
+                    score = score_item(brand, ingredients)[0]  # numeric score
+                    brand_scores.append((brand, score, ingredients))
+
+                # ✅ Sort by score (ascending = cleanest first)
+                brand_scores.sort(key=lambda x: x[1], reverse=True)
+
+                # ✅ Generate sleek numbers AFTER sorting
+                sleek_numbers = generate_sleek_numbers(len(brand_scores))
+
+                # 🎨 Assign consistent color per item
+                item_color = "#ffffff" if i != 0 else item_colors[item_index % len(item_colors)]
+
+                st.markdown(f"<h3 style='margin-top:40px;'>🧺 <u>{item_text}</u></h3>", unsafe_allow_html=True)
+
+                # Get min and max scores for scaling
+                scores_only = [s for _, s, _ in brand_scores]
+                min_score = min(scores_only)
+                max_score = max(scores_only)
+                score_range = max_score - min_score or 1
+                
+                for i, (brand, score, ingredients) in enumerate(brand_scores):
+                    number = sleek_numbers[i]
+                    number_html = f"<span style='background-color:#333;color:#fff;padding:4px 10px;border-radius:20px;font-weight:bold;'>#{i + 1}</span>"
+                    brand_line_html = (
+                        f"<div style='display: flex; align-items: center; gap: 12px;'>"
+                        f"{number_html}"
+                        f"<span style='font-weight: bold;'>{brand}</span>"
+                        f"</div>"
+                        )
+                    # Flip scaling so cleanest = biggest
+                    raw_normalized = 1 - (score - min_score) / score_range
+                    normalized = raw_normalized ** 0.5  # square root curve
+                
+                    # Boost top brand visually
+                    if i == 0:
+                        padding = 40
+                        font_size = 1.6
+                        shadow_strength = 0.25
+                    else:
+                        padding = 20 + int(normalized * 20)         # 20–40px
+                        font_size = 1.0 + normalized * 0.4          # 1.0–1.4em
+                        shadow_strength = 0.08 + normalized * 0.17  # 0.08–0.25
+                
+                    border_style = (
+                        "4px solid #ff5722; box-shadow: 0 0 20px rgba(255, 87, 34, 0.6); background-image: linear-gradient(135deg, #ffe0b2, #ffccbc);"
+                        if i == 0 else
+                        "1px solid #ddd;"
+                    )
+                    
+                    clean_score_html = f"<span style='background: linear-gradient(90deg, #4caf50, #81c784); color: white; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 1em; display: inline-block;'>{score}</span>"
+                    
+                    item_formatted = color_code_ingredients(ingredients, score)
+                    joined_items = (
+                        item_formatted[1]
+                        if item_formatted[1] == "Ingredients Not Available"
+                        else ", ".join(item_formatted[1])
+                    )
+                
+                    badge_html = "<div style='color:#fff;background-color:#ff5722;padding:8px 20px;border-radius:20px;display:inline-block;font-weight:bold;margin-bottom:10px;'>🏆 Top Pick</div>"
+                    top_badge = badge_html if i == 0 else ""
+                
+                    html_block = (
+                        f"<div style='background-color: {item_color}; border-radius: 12px; padding: {padding}px; "
+                        f"margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,{shadow_strength}); border: {border_style}; transition: all 0.3s ease;'>"
+                        f"{top_badge}"
+                        f"<div style='font-size:{font_size}em; font-weight:bold; margin-bottom:10px;'>"
+                        f"{number_html} {brand}"
+                        f"</div>"
+                        f"<div style='font-size:1em;'>"
+                        f"<div><span style='font-weight:bold;'>→ CleanScore:</span> {clean_score_html}</div>"
+                        f"<div><span style='font-weight:bold;'>| Ingredients:</span> {joined_items}</div>"
+                        f"</div>"
+                        f"</div>"
+                    )
+                    
+                    st.markdown(html_block, unsafe_allow_html=True)
+            st.session_state.show_create_cleanlist_button = False  # Optional: hide after click
+        st.markdown('</div>', unsafe_allow_html=True)            
+elif not st.session_state.editing and not st.session_state.item_list:
+    if not st.session_state.just_interacted and st.session_state.app_initialized:
+        flash_message("Your CleanList is currently empty.", msg_type="info", duration=2)
+
+st.session_state.just_interacted = False         # Reset interaction flag for next rerun
+
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
 #                                                          ---- Image Upload ----
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
