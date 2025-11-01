@@ -20,7 +20,7 @@ from sentence_transformers import CrossEncoder
 import matplotlib.pyplot as plt, seaborn as sns, plotly.express as px, textwrap
 import streamlit as st
 from uuid import uuid4
-
+st.write("Files in working directory:", os.listdir())
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
 #                                                          ---- Heuristic CleanScore engine ----
