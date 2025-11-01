@@ -20,7 +20,7 @@ from sentence_transformers import CrossEncoder
 import matplotlib.pyplot as plt, seaborn as sns, plotly.express as px, textwrap
 import streamlit as st
 from uuid import uuid4
-st.write("Files in working directory:", os.listdir())
+#st.write("Files in working directory:", os.listdir())
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-**-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*
 #                                                          ---- Heuristic CleanScore engine ----
@@ -450,53 +450,6 @@ st.markdown(f"""
         </a>
     </div>
 """, unsafe_allow_html=True)
-# try:
-#     with open("CleanList logo.png", "rb") as f:
-#         logo_data = f.read()
-#         st.image(logo_data, use_column_width=True)
-# except FileNotFoundError:
-#     st.warning("Logo image not found. Skipping display.")
-
-# # Inject custom CSS
-# st.markdown(f"""
-#     <style>
-#         .top-banner {{
-#             background-image: url("data:image/png;base64,{bg_data}");
-#             background-size: cover;
-#             background-position: center;
-#             padding: 3rem 1rem;
-#             text-align: center;
-#             width: 100%;
-#             position: sticky;
-#             top: 0;
-#             z-index: 999;
-#         }}
-#         .sticky-header h1 {{
-#             font-family: 'Inter', sans-serif;
-#             font-size: 6vw;
-#             margin: 0;
-#             font-weight: bold;
-#             color: white;
-#             text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-#         }}
-#         .responsive-logo {{
-#             max-width: 250px;
-#             height: auto;
-#             margin-bottom: 1rem;
-#         }}
-#         @media (max-width: 768px) {{
-#             .sticky-header h1 {{
-#                 font-size: 8vw;
-#             }}
-#         }}
-#     </style>
-
-#     <div class="top-banner">
-#         <a href="http://192.168.1.77:8501" target="_blank">
-#             <img src="data:image/png;base64,{logo_data}" class="responsive-logo">
-#         </a>
-#     </div>
-# """, unsafe_allow_html=True)
 
 # ---------- Button Row ----------
 st.markdown("""
