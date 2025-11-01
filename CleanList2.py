@@ -400,7 +400,7 @@ with open("banner2.jpg", "rb") as f:
 logo_data = ""
 
 try:
-    with open("CleanList logo.png", "rb") as f:
+    with open("CleanList Logo.png", "rb") as f:
         image_bytes = f.read()
         logo_data = base64.b64encode(image_bytes).decode("utf-8")
         st.image(image_bytes, use_container_width=True)
