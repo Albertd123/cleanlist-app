@@ -314,82 +314,81 @@ def trigger_search_callback():
 st.set_page_config(
     page_title="CleanList",
     page_icon="🍑",
-#    page_icon="favicon-16x16.png"
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ---------- Custom CSS ----------
-st.markdown("""
-    <style>
-    /* Full-width centered logo */
-    .center-logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-    .center-logo img {
-        max-width: 300px;
-        height: auto;
-    }
+# # ---------- Custom CSS ----------
+# st.markdown("""
+#     <style>
+#     /* Full-width centered logo */
+#     .center-logo {
+#         display: flex;
+#         justify-content: center;
+#         align-items: center;
+#         width: 100%;
+#         margin-top: 1rem;
+#         margin-bottom: 1rem;
+#     }
+#     .center-logo img {
+#         max-width: 300px;
+#         height: auto;
+#     }
 
-    /* Sticky header */
-    .sticky-header {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 999;
-        padding: 0.5rem 1rem;
-        border-bottom: 1px solid #eee;
-    }
+#     /* Sticky header */
+#     .sticky-header {
+#         position: sticky;
+#         top: 0;
+#         background-color: white;
+#         z-index: 999;
+#         padding: 0.5rem 1rem;
+#         border-bottom: 1px solid #eee;
+#     }
 
-    /* Responsive layout */
-    @media (max-width: 768px) {
-        .center-logo img {
-            max-width: 200px;
-        }
-        .sticky-header h1 {
-            font-size: 1.5rem;
-        }
-    }
+#     /* Responsive layout */
+#     @media (max-width: 768px) {
+#         .center-logo img {
+#             max-width: 200px;
+#         }
+#         .sticky-header h1 {
+#             font-size: 1.5rem;
+#         }
+#     }
 
-    /* Remove default padding */
-    .block-container {
-        padding-top: 0rem;
-        padding-bottom: 1rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
+#     /* Remove default padding */
+#     .block-container {
+#         padding-top: 0rem;
+#         padding-bottom: 1rem;
+#         padding-left: 1rem;
+#         padding-right: 1rem;
+#     }
+#     </style>
+# """, unsafe_allow_html=True)
 
-# ---------- Logo ----------
-st.markdown("""
-    <style>
-     .responsive-logo {
-        max-width: 250px;
-        height: auto;
-    }
+# # ---------- Logo ----------
+# st.markdown("""
+#     <style>
+#      .responsive-logo {
+#         max-width: 250px;
+#         height: auto;
+#     }
 
-    @media (max-width: 768px) {
-        .responsive-logo {
-            max-width: 180px;
-        }
-    }
-    .sticky-header {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 999;
-        padding: 0.55rem 1rem;
-        border-bottom: 1px solid #eee;
-        margin-bottom: 1rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
+#     @media (max-width: 768px) {
+#         .responsive-logo {
+#             max-width: 180px;
+#         }
+#     }
+#     .sticky-header {
+#         position: sticky;
+#         top: 0;
+#         background-color: white;
+#         z-index: 999;
+#         padding: 0.55rem 1rem;
+#         border-bottom: 1px solid #eee;
+#         margin-bottom: 1rem;
+#     }
+#     </style>
+# """, unsafe_allow_html=True)
 
 
 # Load and encode background pic
