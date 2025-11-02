@@ -554,7 +554,7 @@ if st.session_state.editing:
         st.rerun()
             
 # ---------- Current Items  List (always visible) ----------
-if st.session_state.item_list and not st.session_state.editing:
+if st.session_state.item_list and not st.session_state.editing and not st.session_state.get("cleanlist_created", False):
     st.markdown("🧪 Current Items:")
     for i, it in enumerate(st.session_state.item_list, 1):
         st.markdown(f"{i}. {it['label']}")

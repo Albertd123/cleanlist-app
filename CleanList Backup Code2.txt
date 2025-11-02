@@ -554,7 +554,7 @@ if st.session_state.editing:
         st.rerun()
             
 # ---------- Current Items  List (always visible) ----------
-if st.session_state.item_list and not st.session_state.editing:
+if st.session_state.item_list and not st.session_state.editing and not st.session_state.get("cleanlist_created", False):
     st.markdown("🧪 Current Items:")
     for i, it in enumerate(st.session_state.item_list, 1):
         st.markdown(f"{i}. {it['label']}")
@@ -615,6 +615,11 @@ if not st.session_state.editing and st.session_state.get("show_create_cleanlist_
             # 🎨 Color palette for item-level styling
             item_colors = ["#e0f7fa", "#fce4ec", "#f3e5f5", "#e8f5e9", "#fff3e0", "#ede7f6", "#f9fbe7", "#e1f5fe"]
 
+            # Start horizontal scroll container
+            st.markdown("""
+            <div style="display: flex; overflow-x: auto; gap: 20px; padding: 10px;">
+            """, unsafe_allow_html=True)
+            
             for item_index, item_dict in enumerate(st.session_state.item_list):
                 item_text = item_dict["label"]
                 label = normalize_text(item_text)
@@ -622,74 +627,61 @@ if not st.session_state.editing and st.session_state.get("show_create_cleanlist_
                 if not brand_list:
                     st.markdown(f"<div style='color:gray;font-style:italic;'>{item_text} → No brands found.</div>", unsafe_allow_html=True)
                     continue
-
+            
                 brand_scores = []
                 for brand in brand_list:
                     ingredients = grocery_item_db.get(brand, ["Ingredients Not Available"])
-                    score = score_item(brand, ingredients)[0]  # numeric score
+                    score = score_item(brand, ingredients)[0]
                     brand_scores.append((brand, score, ingredients))
-
-                # ✅ Sort by score (ascending = cleanest first)
+            
                 brand_scores.sort(key=lambda x: x[1], reverse=True)
-
-                # ✅ Generate sleek numbers AFTER sorting
                 sleek_numbers = generate_sleek_numbers(len(brand_scores))
-
-                # 🎨 Assign consistent color per item
                 item_color = "#ffffff" if i != 0 else item_colors[item_index % len(item_colors)]
-
+            
                 st.markdown(f"<h3 style='margin-top:40px;'>🧺 <u>{item_text}</u></h3>", unsafe_allow_html=True)
-
-                # Get min and max scores for scaling
+            
                 scores_only = [s for _, s, _ in brand_scores]
                 min_score = min(scores_only)
                 max_score = max(scores_only)
                 score_range = max_score - min_score or 1
-                
+            
                 for i, (brand, score, ingredients) in enumerate(brand_scores):
                     number = sleek_numbers[i]
                     number_html = f"<span style='background-color:#333;color:#fff;padding:4px 10px;border-radius:20px;font-weight:bold;'>#{i + 1}</span>"
-                    brand_line_html = (
-                        f"<div style='display: flex; align-items: center; gap: 12px;'>"
-                        f"{number_html}"
-                        f"<span style='font-weight: bold;'>{brand}</span>"
-                        f"</div>"
-                        )
-                    # Flip scaling so cleanest = biggest
+            
                     raw_normalized = 1 - (score - min_score) / score_range
-                    normalized = raw_normalized ** 0.5  # square root curve
-                
-                    # Boost top brand visually
+                    normalized = raw_normalized ** 0.5
+            
                     if i == 0:
                         padding = 40
                         font_size = 1.6
                         shadow_strength = 0.25
                     else:
-                        padding = 20 + int(normalized * 20)         # 20–40px
-                        font_size = 1.0 + normalized * 0.4          # 1.0–1.4em
-                        shadow_strength = 0.08 + normalized * 0.17  # 0.08–0.25
-                
+                        padding = 20 + int(normalized * 20)
+                        font_size = 1.0 + normalized * 0.4
+                        shadow_strength = 0.08 + normalized * 0.17
+            
                     border_style = (
                         "4px solid #ff5722; box-shadow: 0 0 20px rgba(255, 87, 34, 0.6); background-image: linear-gradient(135deg, #ffe0b2, #ffccbc);"
                         if i == 0 else
                         "1px solid #ddd;"
                     )
-                    
+            
                     clean_score_html = f"<span style='background: linear-gradient(90deg, #4caf50, #81c784); color: white; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 1em; display: inline-block;'>{score}</span>"
-                    
+            
                     item_formatted = color_code_ingredients(ingredients, score)
                     joined_items = (
                         item_formatted[1]
                         if item_formatted[1] == "Ingredients Not Available"
                         else ", ".join(item_formatted[1])
                     )
-                
+            
                     badge_html = "<div style='color:#fff;background-color:#ff5722;padding:8px 20px;border-radius:20px;display:inline-block;font-weight:bold;margin-bottom:10px;'>🏆 Top Pick</div>"
                     top_badge = badge_html if i == 0 else ""
-                
+            
                     html_block = (
                         f"<div style='background-color: {item_color}; border-radius: 12px; padding: {padding}px; "
-                        f"margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,{shadow_strength}); border: {border_style}; transition: all 0.3s ease;'>"
+                        f"min-width: 300px; max-width: 400px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,{shadow_strength}); border: {border_style}; transition: all 0.3s ease;'>"
                         f"{top_badge}"
                         f"<div style='font-size:{font_size}em; font-weight:bold; margin-bottom:10px;'>"
                         f"{number_html} {brand}"
@@ -700,7 +692,7 @@ if not st.session_state.editing and st.session_state.get("show_create_cleanlist_
                         f"</div>"
                         f"</div>"
                     )
-                    
+            
                     st.markdown(html_block, unsafe_allow_html=True)
             st.session_state.show_create_cleanlist_button = False  # Optional: hide after click
         st.markdown('</div>', unsafe_allow_html=True)            
